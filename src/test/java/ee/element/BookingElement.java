@@ -1,10 +1,10 @@
 package ee.element;
 
-import ee.type.BookingType;
+import ee.domain.Booking;
 import net.serenitybdd.core.annotations.ImplementedBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-@ImplementedBy(BookingImpl.class)
-public interface Booking extends WebElementFacade, Comparable<BookingType> {
+@ImplementedBy(BookingElementImpl.class)
+public interface BookingElement extends WebElementFacade, Comparable<Booking> {
     void clickDelete();
 }

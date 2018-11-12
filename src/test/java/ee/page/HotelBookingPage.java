@@ -1,8 +1,8 @@
 package ee.page;
 
-import ee.element.Booking;
-import ee.element.DatePicker;
-import ee.type.BookingType;
+import ee.domain.Booking;
+import ee.element.BookingElement;
+import ee.element.DatePickerElement;
 import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -30,16 +30,16 @@ public class HotelBookingPage extends PageObject {
     private WebElementFacade depositDropdownElement;
 
     @FindBy(id="checkin")
-    private DatePicker checkinDatePickerElement;
+    private DatePickerElement checkinDatePickerElementElement;
 
     @FindBy(id="checkout")
-    private DatePicker checkoutDatePickerElement;
+    private DatePickerElement checkoutDatePickerElementElement;
 
     @FindBy(css="#form input[type='button']")
     private WebElementFacade save;
 
     @FindBy(css = bookingRowCssSelector)
-    private List<Booking> bookingElements;
+    private List<BookingElement> bookingElementElements;
 
     private int preSaveElementCount;
 
@@ -48,13 +48,13 @@ public class HotelBookingPage extends PageObject {
         waitForRenderedElements(By.cssSelector(bookingRowCssSelector));
     }
 
-    public void fillCreateBookingForm(BookingType bookingType) {
-        firstnameInputElement.sendKeys(bookingType.getFirstname());
-        lastnameInputElement.sendKeys(bookingType.getLastname());
-        totalPriceInputElement.sendKeys(bookingType.getTotalPrice().toString());
-        depositDropdownElement.selectByVisibleText(bookingType.getDepositPaid().toString());
-        checkinDatePickerElement.selectDate(bookingType.getBookingDates().getCheckin());
-        checkoutDatePickerElement.selectDate(bookingType.getBookingDates().getCheckout());
+    public void fillCreateBookingForm(Booking booking) {
+        firstnameInputElement.sendKeys(booking.getFirstname());
+        lastnameInputElement.sendKeys(booking.getLastname());
+        totalPriceInputElement.sendKeys(booking.getTotalprice() != null ? booking.getTotalprice().toString() : "");
+        depositDropdownElement.selectByVisibleText(booking.getDepositpaid() != null ? booking.getDepositpaid().toString() : "true");
+        checkinDatePickerElementElement.selectDate(booking.getBookingDates().getCheckin());
+        checkoutDatePickerElementElement.selectDate(booking.getBookingDates().getCheckout());
     }
 
     public WebElementFacade getDepositDropdownElement() {
@@ -62,29 +62,29 @@ public class HotelBookingPage extends PageObject {
     }
 
     public void save() {
-        preSaveElementCount = bookingElements.size();
+        preSaveElementCount = bookingElementElements.size();
         save.click();
     }
 
-    public boolean bookingIsPresent(BookingType bookingType) {
+    public boolean bookingIsPresent(Booking booking) {
         return waitForCondition().until(
-            webDriver -> preSaveElementCount != bookingElements.size() &&
-                bookingElements.stream().anyMatch(booking -> booking.compareTo(bookingType) > 0)
+            webDriver -> preSaveElementCount != bookingElementElements.size() &&
+                bookingElementElements.stream().anyMatch(bookingElement -> bookingElement.compareTo(booking) > 0)
         );
     }
 
-    public void delete(BookingType bookingType) {
-        bookingElements.stream().filter(
-            booking -> booking.getWrappedElement().getAttribute("id").equals(bookingType.getBookingid().toString())
+    public void delete(Booking booking) {
+        bookingElementElements.stream().filter(
+            bookingElement -> bookingElement.getWrappedElement().getAttribute("id").equals(booking.getBookingid().toString())
         ).findFirst()
             .orElseThrow(IllegalArgumentException::new)
             .clickDelete();
     }
 
-    public boolean bookingIsNotPresent(BookingType bookingType) {
+    public boolean bookingIsNotPresent(Booking booking) {
         setWaitForTimeout(1000);
         try {
-            bookingIsPresent(bookingType);
+            bookingIsPresent(booking);
             return false;
         } catch (TimeoutException e) {
             return true;

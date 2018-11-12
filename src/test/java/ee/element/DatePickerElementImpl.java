@@ -10,10 +10,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class DatePickerImpl extends WebElementFacadeImpl implements DatePicker {
+public class DatePickerElementImpl extends WebElementFacadeImpl implements DatePickerElement {
     private final WebDriver driver;
 
-    public DatePickerImpl(WebDriver driver, ElementLocator locator, WebElement webElement, long implicitTimeoutInMilliseconds) {
+    public DatePickerElementImpl(WebDriver driver, ElementLocator locator, WebElement webElement, long implicitTimeoutInMilliseconds) {
         super(driver, locator, webElement, implicitTimeoutInMilliseconds);
 
         this.driver = driver;
@@ -21,6 +21,10 @@ public class DatePickerImpl extends WebElementFacadeImpl implements DatePicker {
 
     @Override
     public void selectDate(String date) {
+        if (date == null) {
+            return;
+        }
+
         try {
             getElement().click();
 

@@ -1,10 +1,9 @@
 package ee.steps.backend;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.But;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import ee.type.BookingType;
+import ee.domain.Booking;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.core.Serenity;
@@ -28,8 +27,8 @@ public class DeleteBookingSteps {
             Integer fakeBookingRef = Serenity.sessionVariableCalled(FAKE_BOOKING_REFERENCE);
             deleteBooking(fakeBookingRef.toString());
         } else if (Serenity.sessionVariableCalled(BOOKING) != null) {
-            BookingType bookingType = Serenity.sessionVariableCalled(BOOKING);
-            deleteBooking(bookingType.getBookingid().toString());
+            Booking booking = Serenity.sessionVariableCalled(BOOKING);
+            deleteBooking(booking.getBookingid().toString());
         } else {
             throw new RuntimeException("No booking specified to delete.");
         }

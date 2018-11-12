@@ -1,6 +1,6 @@
 # Manual Execution - Run 1 (10/11/2018)
 
-**NOTE: I wouldn't normally use markdown to write up this sort of thing, you'd hope there would be appropriate tooling.. but if not I'd enforce getting some.**
+**NOTE: I wouldn't normally use markdown to write up this sort of thing, you'd hope there would be appropriate tooling.. but if not I'd recommend getting some.**
 
 ## Details
 *Spec: Functional Testing Spec.md*<br />

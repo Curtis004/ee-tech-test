@@ -1,6 +1,6 @@
 package ee.element;
 
-import ee.type.BookingType;
+import ee.domain.Booking;
 import net.serenitybdd.core.pages.WebElementFacadeImpl;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.Objects;
 
-public class BookingImpl extends WebElementFacadeImpl implements Booking {
+public class BookingElementImpl extends WebElementFacadeImpl implements BookingElement {
     @FindBy(css = "div:nth-child(1)")
     private WebElement firstnameElement;
 
@@ -34,7 +34,7 @@ public class BookingImpl extends WebElementFacadeImpl implements Booking {
     @FindBy(css = "input[type='button']")
     private WebElement deleteButton;
 
-    public BookingImpl(WebDriver driver, ElementLocator locator, WebElement webElement, long implicitTimeoutInMilliseconds) {
+    public BookingElementImpl(WebDriver driver, ElementLocator locator, WebElement webElement, long implicitTimeoutInMilliseconds) {
         super(driver, locator, webElement, implicitTimeoutInMilliseconds);
 
         PageFactory.initElements(new DefaultElementLocatorFactory(getElement()), this);
@@ -45,13 +45,13 @@ public class BookingImpl extends WebElementFacadeImpl implements Booking {
     }
 
     @Override
-    public int compareTo(@NotNull BookingType bookingType) {
-        if (Objects.equals(firstnameElement.getText(), bookingType.getFirstname()) &&
-            Objects.equals(lastnameElement.getText(), bookingType.getLastname()) &&
-            Objects.equals(totalPriceElement.getText(), bookingType.getTotalPrice().toString()) &&
-            Objects.equals(depositPaidElement.getText(), bookingType.getDepositPaid().toString()) &&
-            Objects.equals(checkinElement.getText(), bookingType.getBookingDates().getCheckin()) &&
-            Objects.equals(checkoutElement.getText(), bookingType.getBookingDates().getCheckout())
+    public int compareTo(@NotNull Booking bookingImpl) {
+        if (Objects.equals(firstnameElement.getText(), bookingImpl.getFirstname()) &&
+            Objects.equals(lastnameElement.getText(), bookingImpl.getLastname()) &&
+            Objects.equals(totalPriceElement.getText(), bookingImpl.getTotalprice().toString()) &&
+            Objects.equals(depositPaidElement.getText(), bookingImpl.getDepositpaid().toString()) &&
+            Objects.equals(checkinElement.getText(), bookingImpl.getBookingDates().getCheckin()) &&
+            Objects.equals(checkoutElement.getText(), bookingImpl.getBookingDates().getCheckout())
         ) {
             return 1;
         }

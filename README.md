@@ -1,7 +1,11 @@
 # EE Tech Test
 
-IMPORTANT: The tests were written with my opinions in full force therefore they fail based on the functional requirements specified.
-This was to ensure I could write enough code to demonstrate what I wanted to and not be limited by functional scope.
+**IMPORTANT: The tests were written with my opinions in full force therefore they fail based on the functional requirements I came up with.
+This was to ensure I could write enough code to demonstrate what I wanted to demonstrate and not be limited by current functional capability.**
+
+## Keep in mind
+
+I created this on an OSX machine, I've implemented measures to ensure it'll work in chrome on windows and linux but not much else.
 
 ## Summary of Approach
 
@@ -20,15 +24,16 @@ My testing specification is `./manual/Functional Testing Spec.md`
 ### Automated
 
 1. I chose to go with Java as a few projects I'm working on are using it and therefore I wouldn't require any refreshment.
-In choosing Java the frameworks I advocate (changes from time to time) are Cucumber and Serenity.
-I believe that BDD has it's place and serenity provides helpful abstraction to get moving quickly and great reporting, I decided that the screenplay would be overkill for what I was doing.
+In choosing Java the frameworks I advocate (changes from time to time) are Cucumber, Serenity and Rest Assured (API testing).
+I believe that BDD has it's place and serenity provides helpful abstraction to get moving quickly and great reporting, I decided
+that the screenplay pattern would be overkill for what I was doing so this is a vanilla cucumber and serenity project.
 
 2. Using the stories defined for the manual testing I created feature files, step libraries and page objects (pretty much in that order) for web testing.
 For testing the backend directly I integrated rest assured into steps specifically used to interact with the backend.
 
 ## Running the tests
 
-You can run the tests with maven using `mvn verify`. The fail safe plugin is wired up to this lifecycle target.
+You can run the tests with maven using `mvn verify`.
 
 ### Reports
 

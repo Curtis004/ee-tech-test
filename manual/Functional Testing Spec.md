@@ -1,6 +1,6 @@
 # Manual Testing Spec
 
-**NOTE: I wouldn't normally use markdown to write up this sort of thing, you'd hope there would be appropriate tooling.. but if not I'd enforce getting some.**
+**NOTE: I wouldn't normally use markdown to write up this sort of thing, you'd hope there would be appropriate tooling.. but if not I'd recommend getting some.**
 
 ## User Stories
 
