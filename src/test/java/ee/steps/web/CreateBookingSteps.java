@@ -3,9 +3,14 @@ package ee.steps.web;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
+import ee.SerenitySession;
+import ee.domain.Booking;
 import ee.mother.BookingTypeMother;
 import ee.page.HotelBookingPage;
+import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
+
+import static ee.SerenitySession.BOOKING;
 
 public class CreateBookingSteps {
     @Steps
@@ -28,6 +33,11 @@ public class CreateBookingSteps {
         hotelBookingPage.getDepositDropdownElement().selectByVisibleText(
             payingDeposit.equals("will") ? "true" : "false"
         );
+
+        Booking booking = Serenity.sessionVariableCalled(BOOKING);
+        booking.setDepositpaid(payingDeposit.equals("will"));
+
+        Serenity.setSessionVariable(BOOKING).to(booking);
     }
 
     @When("^I save that information$")

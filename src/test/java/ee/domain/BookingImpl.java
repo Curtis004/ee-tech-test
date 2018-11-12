@@ -70,26 +70,10 @@ public class BookingImpl implements Booking<Double>{
     public void addBookingDates(Date from, Date until) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        this.bookingdates = new Dates();
-        bookingdates.checkin = simpleDateFormat.format(from);
-        bookingdates.checkout = simpleDateFormat.format(until);
-    }
+        Dates dates = new Dates();
+        dates.setCheckin(simpleDateFormat.format(from));
+        dates.setCheckout(simpleDateFormat.format(until));
 
-    public class Dates {
-        private String checkin;
-
-        private String checkout;
-
-        public String getCheckin() {
-            return checkin;
-        }
-
-        public String getCheckout() {
-            return checkout;
-        }
-
-        Dates() {
-
-        }
+        this.bookingdates = dates;
     }
 }

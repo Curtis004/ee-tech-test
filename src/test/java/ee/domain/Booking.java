@@ -11,7 +11,9 @@ public interface Booking<T> {
 
     Boolean getDepositpaid();
 
-    BookingImpl.Dates getBookingDates();
+    Dates getBookingDates();
 
     void setBookingid(Long bookingid);
+
+    void setDepositpaid(Boolean depositpaid);
 }

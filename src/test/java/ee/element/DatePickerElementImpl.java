@@ -5,12 +5,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DatePickerElementImpl extends WebElementFacadeImpl implements DatePickerElement {
+    private static Logger logger = LoggerFactory.getLogger(DatePickerElement.class);
+
     private final WebDriver driver;
 
     public DatePickerElementImpl(WebDriver driver, ElementLocator locator, WebElement webElement, long implicitTimeoutInMilliseconds) {
@@ -26,10 +30,10 @@ public class DatePickerElementImpl extends WebElementFacadeImpl implements DateP
         }
 
         try {
-            getElement().click();
-
             Calendar desiredDateCalender = Calendar.getInstance();
             desiredDateCalender.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(date));
+
+            getElement().click();
 
             int desiredMonth = desiredDateCalender.get(Calendar.MONTH);
             int desiredDay = desiredDateCalender.get(Calendar.DAY_OF_MONTH);
@@ -52,7 +56,8 @@ public class DatePickerElementImpl extends WebElementFacadeImpl implements DateP
                 driver.findElements(By.cssSelector("td[data-handler='selectDay']")).get(desiredDay - 1).click();
             }
         } catch (ParseException e) {
-            throw new RuntimeException("Unable to parse date " + date + " into a date object.", e);
+            logger.warn("Unable to parse date " + date + " into a date object.");
+            getElement().sendKeys(date);
         }
     }
 }

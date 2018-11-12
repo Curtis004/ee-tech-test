@@ -15,7 +15,8 @@
         <serenity.cucumber.version>1.9.20</serenity.cucumber.version>
         <webdriver.driver>chrome</webdriver.driver>
         <webdriver.wait.for.timeout>10000</webdriver.wait.for.timeout>
-        <webdriver.timeouts.implicitlywait>10000</webdriver.timeouts.implicitlywait>
+        <webdriver.timeouts.implicitlywait>5000</webdriver.timeouts.implicitlywait>
+        <thucycides.step.delay>300</thucycides.step.delay>
     </properties>
 
     <repositories>

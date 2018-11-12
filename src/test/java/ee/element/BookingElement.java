@@ -7,4 +7,6 @@ import net.serenitybdd.core.pages.WebElementFacade;
 @ImplementedBy(BookingElementImpl.class)
 public interface BookingElement extends WebElementFacade, Comparable<Booking> {
     void clickDelete();
+
+    String getFirstName();
 }

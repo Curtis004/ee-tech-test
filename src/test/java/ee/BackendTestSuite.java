@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
     tags = "@Backend",
     glue = {
         "ee.hooks",
+        "ee.steps.common",
         "ee.steps.backend",
         "ee.steps.libraries"
     }

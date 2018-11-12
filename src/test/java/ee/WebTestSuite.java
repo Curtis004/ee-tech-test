@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
     tags = "@Web",
     glue = {
         "ee.hooks",
+        "ee.steps.common",
         "ee.steps.web",
         "ee.steps.libraries"
     }

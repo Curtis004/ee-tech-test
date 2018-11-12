@@ -1,4 +1,4 @@
-package ee.steps;
+package ee.steps.common;
 
 import cucumber.api.java.en.But;
 import cucumber.api.java.en.Given;

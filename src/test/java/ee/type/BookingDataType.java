@@ -2,6 +2,11 @@ package ee.type;
 
 import ee.domain.Booking;
 import ee.domain.BookingImpl;
+import ee.domain.Dates;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class BookingDataType implements Booking<String> {
     private Long bookingid;
@@ -14,7 +19,9 @@ public class BookingDataType implements Booking<String> {
 
     private Boolean depositpaid;
 
-    private BookingImpl.Dates bookingdates;
+    private Dates bookingdates;
+
+    private String fromto;
 
     @Override
     public Long getBookingid() {
@@ -42,12 +49,48 @@ public class BookingDataType implements Booking<String> {
     }
 
     @Override
-    public BookingImpl.Dates getBookingDates() {
-        return null;
+    public Dates getBookingDates() {
+        return parseFromToIntoDates();
     }
 
     @Override
     public void setBookingid(Long bookingid) {
         this.bookingid = bookingid;
+    }
+
+    @Override
+    public void setDepositpaid(Boolean depositpaid) {
+        this.depositpaid = depositpaid;
+    }
+
+    private Dates parseFromToIntoDates() {
+        try {
+            Dates dates = new Dates();
+            String[] fromTo = fromto.split(" to ");
+
+            if (!fromTo[0].contains("today") || !fromTo[1].contains("today")) {
+                dates.setCheckin(fromTo[0]);
+                dates.setCheckout(fromTo[1]);
+
+                return dates;
+            }
+
+            Calendar fromCalendar = Calendar.getInstance();
+            fromCalendar.setTime(new Date());
+
+            Calendar toCalendar = Calendar.getInstance();
+            toCalendar.setTime(new Date());
+
+            fromCalendar.add(Calendar.DAY_OF_YEAR, Integer.parseInt(fromTo[0].substring("today".length())));
+            toCalendar.add(Calendar.DAY_OF_YEAR, Integer.parseInt(fromTo[1].substring("today".length())));
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            dates.setCheckin(simpleDateFormat.format(fromCalendar.getTime()));
+            dates.setCheckout(simpleDateFormat.format(toCalendar.getTime()));
+
+            return dates;
+        } catch (IndexOutOfBoundsException e) {
+            return new Dates();
+        }
     }
 }

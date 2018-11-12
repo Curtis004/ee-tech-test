@@ -45,6 +45,11 @@ public class BookingElementImpl extends WebElementFacadeImpl implements BookingE
     }
 
     @Override
+    public String getFirstName() {
+        return firstnameElement.getText();
+    }
+
+    @Override
     public int compareTo(@NotNull Booking bookingImpl) {
         if (Objects.equals(firstnameElement.getText(), bookingImpl.getFirstname()) &&
             Objects.equals(lastnameElement.getText(), bookingImpl.getLastname()) &&

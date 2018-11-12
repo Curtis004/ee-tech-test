@@ -1,11 +1,15 @@
 # EE Tech Test
 
-**IMPORTANT: The tests were written with my opinions in full force therefore they fail based on the functional requirements I came up with.
+**IMPORTANT: The tests were written with my opinions in full force therefore some of them fail based on the functional requirements I came up with.
 This was to ensure I could write enough code to demonstrate what I wanted to demonstrate and not be limited by current functional capability.**
 
 ## Keep in mind
 
-I created this on an OSX machine, I've implemented measures to ensure it'll work in chrome on windows and linux but not much else.
+* I created the framework on an OSX machine, I've implemented measures to ensure it'll work in chrome on windows and linux but not much else.
+* The code is overkill in relation to what we're testing but it's intended to show how I think and tackle problems.. testing the booking site it merely a side effect.
+* The manual testing resources and executions are in `./manual/`.
+* Cross browser testing can be done through serenity and aggregate reporting, so I didn't include it as it's not my own solution.
+* No comments, normally anything I build has complete javadoc (or equivalent) but time.
 
 ## Summary of Approach
 
